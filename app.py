@@ -5,14 +5,14 @@ from googleapiclient.discovery import build
 import os
 import pandas as pd
 from json import JSONDecodeError
-
+import json
 
 app = Flask(__name__)
 app.secret_key = "sdc"  # Để sử dụng flash messages
 
 '''Kết Nối GG Sheets và GG Drive'''
-SERVICE_ACCOUNT_FILE = os.path.join("config", "SDC2711Accountant.json")
-
+# SERVICE_ACCOUNT_FILE = os.path.join("config", "SDC2711 Accountant.json")
+SERVICE_ACCOUNT_FILE = json.loads(os.environ['GOOGLE_SHEET_CREDENTIALS'])
 # Các quyền (scopes) cần thiết cho Google Sheets và Google Drive
 SCOPES = [
     'https://www.googleapis.com/auth/spreadsheets',  # Quyền đọc/ghi Google Sheets
@@ -20,12 +20,21 @@ SCOPES = [
 ]
 
 # Khởi tạo kết nối với Google API
-creds = Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
 
-# Kết nối Google Sheets API
-sheets_service = build('sheets', 'v4', credentials=creds)
-# Kết nối Google Drive API
-drive_service = build('drive', 'v3', credentials=creds)
+try:
+    creds = Credentials.from_service_account_info(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
+    print("Thông tin đăng nhập hợp lệ.")
+    
+    # Kết nối Google Sheets API
+    sheets_service = build('sheets', 'v4', credentials=creds)
+    
+    # Kết nối Google Drive API
+    drive_service = build('drive', 'v3', credentials=creds)
+    
+except Exception as e:
+    print("Lỗi trong tệp thông tin đăng nhập:", e)
+
+
 
 # Route: Trang chủ
 @app.route("/")
