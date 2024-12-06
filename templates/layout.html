@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/ae360af17e.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/templatemo-topic-listing.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/css/bootstrap-datepicker.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <title>{% block title %}SDC Automation{% endblock %}</title>
+</head>
+
+<body>
+    <div class="wrapper" style="display: flex; flex-direction: row; height: 100vh;">
+        <!-- Sidebar -->
+        <aside id="sidebar">
+            <div class="h-100">
+                <div class="sidebar-logo">
+                    <a href="{{ url_for('homepage') }}">SDC Automation</a>
+                </div>
+                <!-- Sidebar Navigation -->
+                <aside id="sidebar">
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link">
+                                <i class="fa-solid fa-list pe-2"></i>
+                                Trello
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ url_for('vanhanhsx') }}" class="sidebar-link">
+                                <i class="fa-solid fa-list pe-2"></i>
+                                Vận hành sản xuất
+                            </a>
+                            
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
+                                aria-expanded="false" aria-controls="pages">
+                                <i class="fa-regular fa-file-lines pe-2"></i>
+                                Kế toán
+                            </a>
+                            <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                                <li class="sidebar-item">
+                                    <a href="{{ url_for('home') }}" class="sidebar-link">Xử lý dữ liệu TMĐT</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ url_for('nhapthu') }}" class="sidebar-link">Nhập thu</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ url_for('nhapchi') }}" class="sidebar-link">Nhập chi</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="#" class="sidebar-link">Chấm công</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="#" class="sidebar-link">Bảng lương</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="#" class="sidebar-link">Theo dõi công nợ</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard"
+                                aria-expanded="false" aria-controls="dashboard">
+                                <i class="fa-solid fa-sliders pe-2"></i>
+                                Bán hàng
+                            </a>
+                            <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                                <li class="sidebar-item">
+                                    <a href="{{ url_for('danhmucsanpham') }}" class="sidebar-link">Danh mục sản phẩm</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="#" class="sidebar-link">Báo cáo bán hàng</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ url_for('theodoicongno') }}" class="sidebar-link">Theo dõi công nợ</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="#" class="sidebar-link">Khách hàng</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
+                                aria-expanded="false" aria-controls="auth">
+                                <i class="fa-regular fa-user pe-2"></i>
+                                Sản xuất
+                            </a>
+                            <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                                 <li class="sidebar-item">
+                                    <a href="{{ url_for('parttime') }}" class="sidebar-link">Part-Time</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ url_for('quytrinh') }}" class="sidebar-link">Quy trình sản xuất</a>
+                                </li>
+                                
+                                <li class="sidebar-item">
+                                    <a href="{{ url_for('hopxuong') }}" class="sidebar-link">Họp xưởng</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi"
+                                aria-expanded="false" aria-controls="multi">
+                                <i class="fa-solid fa-share-nodes pe-2"></i>
+                                Văn bảng - Quy định
+                            </a>
+                            
+                            <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                                <li class="sidebar-item">
+                                    <a href="{{ url_for('quydinhxuong') }}" class="sidebar-link">Quy định xưởng</a>
+                                    <a href="{{ url_for('quydinhbanhang') }}" class="sidebar-link">Quy định bán hàng</a>
+                                    <a href="{{ url_for('quydinhchung') }}" class="sidebar-link">Quy định chung</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </aside>
+            </div>
+        </aside>
+        <!-- Main Component -->
+        <div class="main">
+            <nav class="navbar navbar-expand px-3 border-bottom">
+                <!-- Button for sidebar toggle -->
+                <button class="btn" type="button" data-bs-theme="dark">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+        
+                <!-- Logo ở giữa -->
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" class="navbar-logo">
+        
+            </nav>
+            {% block content %}
+            <!-- Content will be inserted here -->
+            {% endblock %}
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.9.0/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.vi.min.js"></script>
+    {% block scripts %}
+    {% endblock %}
+</f>
+
+</html>

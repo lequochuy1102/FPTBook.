@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-100 ">
+    <div class="card shadow p-4" style="width: 100%; max-width: 500px;">
+        <h1 class="mb-4 text-center">Xử Lý Dữ Liệu Sàn Shoppe</h1>
+        
+        <!-- Form bắt đầu -->
+        <form method="POST" action="/home" enctype="multipart/form-data">
+
+            <!-- Tải lên file Excel -->
+            <div class="mb-3">
+                <label for="file" class="form-label">Tải lên File Excel</label>
+                <input type="file" class="form-control" id="file" name="file" accept=".xls,.xlsx" required>
+                <div class="form-text"></div>
+            </div>
+
+            <!-- Chọn Google Sheets -->
+            <div class="mb-3">
+                <label for="sheet_id" class="form-label">Chọn File</label>
+                <select class="form-select" id="sheet_id" name="sheet_id" required>
+                    <option value="" selected disabled>Chọn Google Sheet</option>
+                    {% for sheet in sheets %}
+                        <option value="{{ sheet.id }}">{{ sheet.name }}</option>
+                    {% endfor %}
+                </select>
+                <div class="form-text"></div>
+            </div>
+
+            <!-- Nhập ngày tháng -->
+            <div class="mb-3">
+                <label for="date" class="form-label">Ngày</label>
+                <input type="text" class="form-control datepicker" id="date" name="date" 
+                       placeholder="DD/MM/YYYY" value="{{ current_date }}" required
+                       pattern="(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[012])/\d{4}"  
+                       title="Vui lòng nhập ngày theo định dạng DD/MM/YYYY.">
+                <div class="form-text"></div>
+            </div>
+
+            <!-- Nút Gửi -->
+            <button type="submit" class="btn btn-primary w-100">Cập Nhập</button>
+        </form>
+
+        <!-- Thông báo khi thành công hoặc lỗi -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="mt-4 alert alert-info" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Nút để mở Google Sheets trong pop-up -->
+        <button class="btn btn-secondary mt-4" onclick="openSheet()">Mở Google Sheets</button>
+    </div>
+</div>
+
+<!-- Modal - Popup để hiển thị Google Sheet -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <iframe id="sheetFrame" src=""></iframe>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    // Hàm mở modal pop-up và hiển thị Google Sheet
+    function openSheet() {
+        const sheetId = document.getElementById('sheet_id').value;  // Lấy ID của Google Sheet đã chọn
+        if (!sheetId) {
+            alert('Vui lòng chọn một Google Sheet.');
+            return;
+        }
+
+        // Đường dẫn đến Google Sheet (chế độ chỉnh sửa)
+        const editUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/edit`;
+
+        // Đặt nguồn cho iframe để hiển thị Google Sheets
+        document.getElementById('sheetFrame').src = editUrl;
+
+        // Hiển thị modal với hiệu ứng chuyển động
+        const modal = document.getElementById('myModal');
+        const modalContent = document.querySelector('.modal-content');
+        modal.style.display = "block";
+        setTimeout(function() {
+            modal.style.opacity = "1";
+            modalContent.style.transform = "scale(1)";
+        }, 10);
+    }
+
+    // Hàm đóng modal pop-up
+    function closeModal() {
+        const modal = document.getElementById('myModal');
+        const modalContent = document.querySelector('.modal-content');
+        modal.style.opacity = "0";
+        modalContent.style.transform = "scale(0)";
+        setTimeout(function() {
+            modal.style.display = "none";
+        }, 300);  // Đồng bộ với thời gian hiệu ứng
+    }
+
+    // Khởi tạo Datepicker
+    $('.datepicker').datepicker({
+        format: 'dd/mm/yyyy', // Định dạng ngày tháng
+        autoclose: true,     // Tự động đóng khi chọn ngày
+        todayHighlight: true, // Làm nổi bật ngày hiện tại
+        clearBtn: true,       // Nút xóa ngày tháng
+        language: 'vi' // Thêm dòng này để đặt ngôn ngữ Tiếng Việts
+    })
+</script>
+{% endblock %}
+{% endblock %}

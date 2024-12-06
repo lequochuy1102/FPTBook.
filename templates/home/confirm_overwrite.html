@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Bạn có chắc chắn muốn ghi đè dữ liệu hiện tại?</h1>
+<p>Ngày tháng đã tồn tại trong bảng. Bạn có muốn ghi đè dữ liệu cho ngày {{ date }} không?</p>
+
+<form action="{{ url_for('overwrite_data') }}" method="POST">
+    <input type="hidden" name="sheet_id" value="{{ sheet_id }}">
+    <input type="hidden" name="sheet_name" value="{{ sheet_name }}">
+    <input type="hidden" name="date" value="{{ date }}">
+    <input type="hidden" name="shop_list" value="{{ shop_list }}">  <!-- Không dùng filter | safe -->
+    <input type="hidden" name="non_vat_data" value="{{ non_vat_data }}"> <!-- Không dùng filter | safe -->
+    <input type="hidden" name="vat_data" value="{{ vat_data }}"> <!-- Không dùng filter | safe -->
+    <button type="submit" name="overwrite" value="yes">Ghi đè</button>
+    <a href="{{ url_for('home') }}">Không ghi đè</a>
+</form>
+{% endblock %}

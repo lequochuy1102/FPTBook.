@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<body> 
+    <div class="banner ">
+        <div class="app-text">
+            <h3>Công ty cổ phẩn <br> thương mại dịch vụ quảng cáo sdc</h3>
+            <h1>SDC<br>SmartData</h1>
+            <p>DataAutomate là một ứng dụng web mạnh mẽ giúp tự động hóa quá trình ghi và đồng bộ dữ liệu trực tiếp từ các nguồn khác nhau lên Google Sheets. Với sự hỗ trợ của API Google, ứng dụng này mang đến giải pháp đơn giản và hiệu quả để tiết kiệm thời gian và giảm thiểu sai sót trong quá trình nhập liệu thủ công.</p>
+
+            
+        </div>
+        <div class="app-picture">
+            <img src="{{ url_for('static', filename='img/10.jpg') }}" alt="Image">
+        </div>
+    </div>
+
+    <div class="about-services">
+        <ul>
+            <li>
+                <img src="{{ url_for('static', filename='img/1.png') }}">
+                <h1>Lê Quốc Huy</h1>
+                <p>Fullstack developer</p>
+            </li>
+            <li>
+                <img src="{{ url_for('static', filename='img/2.png') }}">
+                <h1>Ngô Trường Khánh</h1>
+                <p>Visionary</p>
+            </li>
+            <li>
+                <img src="{{ url_for('static', filename='img/3.png') }}">
+                <h1>Huỳnh Quang Huy</h1>
+                <p>Fullstack developer</p>
+            </li>
+        </ul>
+    </div>
+
+    <div class="social-icons">
+        <ul>
+           <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+           <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+           <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+           <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+        </ul>
+    </div>
+   </div>
+</body>
+
+{% block scripts %}
+  
+
+{% endblock %}
+{% endblock %}
